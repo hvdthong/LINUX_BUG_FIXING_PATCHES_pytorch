@@ -1,5 +1,6 @@
 from ultis import extract_commit, reformat_commit_code
 import argparse
+from data_split import training_testing_split
 
 
 def read_args():
@@ -67,4 +68,6 @@ if __name__ == '__main__':
     commits = extract_commit(path_file=path_file)
     commits = reformat_commit_code(commits=commits, num_file=1, num_hunk=8,
                                    num_loc=10, num_leng=120)
+    nfolds, random_state = 5, None
+    train, test = training_testing_split(commits=commits, nfolds=5, random_state=None)
     print(len(commits))

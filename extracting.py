@@ -94,7 +94,8 @@ def dictionary(data):
     for m in data:
         lists += m.split()
     lists = list(set(lists))
-    lists.append("NULL")
+    lists.append('<UNK>')
+    lists.append("<NULL>")
     new_dict = dict()
     for i in range(len(lists)):
         new_dict[lists[i]] = i
