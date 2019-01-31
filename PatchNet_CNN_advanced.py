@@ -21,8 +21,7 @@ class PatchNet(nn.Module):
         self.embed_msg = nn.Embedding(V_msg, Dim)
         self.convs_msg = nn.ModuleList([nn.Conv2d(Ci, Co, (K, Dim)) for K in Ks])
 
-        # CNN-3D for commit code
-        code_line = args.code_line  # the number of LOC in each hunk of commit code
+        # CNN-2D for commit code
         self.embed_code = nn.Embedding(V_code, Dim)
         self.convs_code_line = nn.ModuleList([nn.Conv2d(Ci, Co, (K, Dim)) for K in Ks])
         self.convs_code_hunk = nn.ModuleList([nn.Conv2d(Ci, Co, (K, Co * len(Ks))) for K in Ks])
