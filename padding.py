@@ -161,7 +161,7 @@ def padding_commit(commits, params):
                                            max_code_line=params.code_line,
                                            max_code_length=params.code_length, dict_code=dict_code)
     labels = load_label_commits(commits=commits)
-    return pad_msg, pad_added_code, pad_removed_code, labels, dict_msg, dict_code
+    return labels, pad_msg, pad_added_code, pad_removed_code, dict_msg, dict_code
 
 
 def padding_train_test_commits(train, test, params):
