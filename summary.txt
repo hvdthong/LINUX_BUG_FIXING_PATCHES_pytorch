@@ -3,3 +3,8 @@ newres.dict: dictionary of commits (commit messages + commit code)
 newres_funcalls_jul28.out.sorted: sorted based on date (train data: jul282018)
 test.pkl, train.pkl, train_dict.pkl: divide testing and training data using 5-fold cross-validation (train_dict.pkl is the dictionary of the training data)
 
+# snapshot 
+# running using PatchNet_CNN
+2019-01-31_09-53-55: -embedding_dim=64 -filter_sizes=1,2,3 -num_filters=64 -hidden_units=512
+
+
