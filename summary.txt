@@ -1,0 +1,5 @@
+# data description
+newres.dict: dictionary of commits (commit messages + commit code)
+newres_funcalls_jul28.out.sorted: sorted based on date (train data: jul282018)
+test.pkl, train.pkl, train_dict.pkl: divide testing and training data using 5-fold cross-validation (train_dict.pkl is the dictionary of the training data)
+

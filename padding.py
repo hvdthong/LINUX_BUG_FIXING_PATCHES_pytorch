@@ -184,7 +184,7 @@ def padding_train_test_commits(train, test, params):
     # testing data
     # -------------------------------------------------------------------------------------------------------
     # -------------------------------------------------------------------------------------------------------
-    test_msgs, test_codes = extract_msg(commits=train), extract_code(commits=test)
+    test_msgs, test_codes = extract_msg(commits=test), extract_code(commits=test)
     test_pad_msg = mapping_commit_msg(msgs=test_msgs, max_length=params.msg_length, dict_msg=train_dict_msg)
     test_pad_added_code = mapping_commit_code(type="added", commits=test, max_hunk=params.code_hunk,
                                               max_code_line=params.code_line,
