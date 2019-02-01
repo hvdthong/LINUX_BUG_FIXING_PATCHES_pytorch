@@ -102,6 +102,17 @@ def extract_commit(path_file):
     return dicts
 
 
+def extract_commit_recent(path_file):
+    # loading recent_data from Julia (data without labels)
+    commits = load_file(path_file=path_file)
+    indexes = commits_index(commits=commits)
+    dicts = list()
+    for i in range(0, len(indexes)):
+        dict = {}
+        print('hello')
+        exit()
+
+
 def reformat_commit_code(commits, num_file, num_hunk, num_loc, num_leng):
     commits = reformat_file(commits=commits, num_file=num_file)
     commits = reformat_hunk(commits=commits, num_hunk=num_hunk, num_loc=num_loc, num_leng=num_leng)
