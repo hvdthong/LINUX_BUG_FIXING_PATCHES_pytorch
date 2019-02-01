@@ -10,5 +10,5 @@ test.pkl, train.pkl, train_dict.pkl: divide testing and training data using 5-fo
 2019-01-31_11-35-44 -embedding_dim=64 -filter_sizes=1,2,3 -num_filters=64 -hidden_units=512
 
 # snapshot (server: LARC)
-2019-02-01_04-27-00 -embedding_dim=64 -filter_sizes=1,2,3 -num_filters=64 -hidden_units=512
+2019-02-01_04-27-00 -embedding_dim=64 -filter_sizes=1,2,3 -num_filters=64 -hidden_units=512  # train_split_data.py
 

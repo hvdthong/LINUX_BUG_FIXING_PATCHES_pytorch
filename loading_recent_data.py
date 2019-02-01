@@ -14,12 +14,14 @@ if __name__ == '__main__':
     commits_recent_sasha = reformat_commit_code(commits=commits_recent_sasha, num_file=1, num_hunk=8,
                                                 num_loc=10, num_leng=120)
 
+    # loading training data
     path_file = './data/newres_funcalls_jul28.out.sorted'
     commits = extract_commit(path_file=path_file)
     commits = reformat_commit_code(commits=commits, num_file=1, num_hunk=8,
                                    num_loc=10, num_leng=120)
 
+    # add recent sasha data with training data
     commits_all = commits + commits_recent_sasha
-    train_all = padding_commit(commits=commits, params=input_option)
-    saving_variable('train_all_recent_sashas', train_all)
+    train_all = padding_commit(commits=commits_all, params=input_option)
+    saving_variable('train_all_recent_sasha', train_all)
     print(len(commits_recent_sasha), len(commits), len(commits_all))

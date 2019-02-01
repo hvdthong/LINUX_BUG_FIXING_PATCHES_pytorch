@@ -69,6 +69,13 @@ def select_commit_based_topwords(words, commits):
     return new_commit
 
 
+def load_info_label(data):
+    data = list(data)
+    pos = [1 for d in data if d == 1]
+    neg = [0 for d in data if d == 0]
+    return len(pos), len(neg)
+
+
 def commits_index(commits):
     commits_index = [i for i, c in enumerate(commits) if c.startswith("commit:")]
     return commits_index
@@ -145,7 +152,7 @@ def extract_commit_recent_sasha(path_file):
         else:
             id, msg, code = commit_info_recent(commits[indexes[i]:indexes[i + 1]])
         dict["id"] = id
-        dict["stable"] = 'True'
+        dict["stable"] = 'true'
         dict["msg"] = msg
         dict["code"] = code
         dicts.append(dict)
@@ -158,7 +165,7 @@ def reformat_commit_code(commits, num_file, num_hunk, num_loc, num_leng):
     return commits
 
 
-def random_mini_batch(X_msg, X_added_code, X_removed_code, Y, mini_batch_size=64, seed=0):
+def shuffled_mini_batches(X_msg, X_added_code, X_removed_code, Y, mini_batch_size=64, seed=0):
     m = X_msg.shape[0]  # number of training examples
     mini_batches = []
     np.random.seed(seed)
@@ -199,7 +206,6 @@ def random_mini_batch(X_msg, X_added_code, X_removed_code, Y, mini_batch_size=64
             mini_batch_Y = shuffled_Y[num_complete_minibatches * mini_batch_size: m]
         else:
             mini_batch_Y = shuffled_Y[num_complete_minibatches * mini_batch_size: m, :]
-        # mini_batch_Y = shuffled_Y[num_complete_minibatches * mini_batch_size: m, :]
         mini_batch = (mini_batch_X_msg, mini_batch_X_added, mini_batch_X_removed, mini_batch_Y)
         mini_batches.append(mini_batch)
     return mini_batches
