@@ -8,6 +8,7 @@ from reformating import reformat_file, reformat_hunk
 import numpy as np
 import math
 import os
+from extracting import hunk_code
 
 
 def load_file(path_file):
@@ -102,15 +103,53 @@ def extract_commit(path_file):
     return dicts
 
 
-def extract_commit_recent(path_file):
+def commit_info_recent(commit):
+    id = commit_id(commit)
+    msg = commit_msg_recent(commit)
+    code = commit_code_recent(commit)
+    return id, msg, code
+
+
+def commit_msg_recent(commit):
+    commit_msg = commit[3].strip()  # extracting the simplified commit message
+    return commit_msg
+
+
+def commit_code_recent(commit):
+    all_code = commit[6:]  # use for march data
+    file_index = [i for i, c in enumerate(all_code) if c.startswith("file:")]
+    dicts = list()
+    for i in range(0, len(file_index)):
+        dict_code = {}
+        if i == len(file_index) - 1:
+            added_code, removed_code = hunk_code(all_code[file_index[i]:])
+        else:
+            added_code, removed_code = hunk_code(all_code[file_index[i]:file_index[i + 1]])
+        dict_code[i] = all_code[file_index[i]].split(":")[1].strip()
+        dict_code["added"] = added_code
+        dict_code["removed"] = removed_code
+        dicts.append(dict_code)
+    return dicts
+
+
+def extract_commit_recent_sasha(path_file):
     # loading recent_data from Julia (data without labels)
+    # the data is getting from sasha so we assume that the data has label stable: true
     commits = load_file(path_file=path_file)
     indexes = commits_index(commits=commits)
     dicts = list()
     for i in range(0, len(indexes)):
         dict = {}
-        print('hello')
-        exit()
+        if i == len(indexes) - 1:
+            id, msg, code = commit_info_recent(commits[indexes[i]:])
+        else:
+            id, msg, code = commit_info_recent(commits[indexes[i]:indexes[i + 1]])
+        dict["id"] = id
+        dict["stable"] = 'True'
+        dict["msg"] = msg
+        dict["code"] = code
+        dicts.append(dict)
+    return dicts
 
 
 def reformat_commit_code(commits, num_file, num_hunk, num_loc, num_leng):
