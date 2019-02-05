@@ -57,6 +57,9 @@ def read_args():
     parser.add_argument('-datetime', type=str, default=None, help='date of model [default: None]')
     parser.add_argument('-start_epoch', type=int, default=None, help='starting epoch of loading model')
     parser.add_argument('-end_epoch', type=int, default=None, help='ending epoch of loading model')
+
+    # load model name
+    parser.add_argument('-file_model', type=str, default=None, help='date of model [default: None]')
     return parser
 
 
