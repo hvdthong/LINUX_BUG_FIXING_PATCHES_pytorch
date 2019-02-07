@@ -22,5 +22,11 @@ test.pkl, train.pkl, train_dict.pkl: divide testing and training data using 5-fo
 # running using PatchNet_CNN_advanced
 2019-02-07_02-15-44 -embedding_dim=64 -filter_sizes=1,2,3 -num_filters=64 -hidden_units=512 # train_all
 
+# snapshot (server: LARC)
+# running using PatchNet_CNN
+2019-02-07_03-25-42 -embedding_dim=64 -filter_sizes=1,2,3 -num_filters=64 -hidden_units=512  # train_split_data
+# running using PatchNet_CNN_advanced
+2019-02-07_03-26-48 -embedding_dim=64 -filter_sizes=1,2,3 -num_filters=64 -hidden_units=512 # train_all
+
 
 
