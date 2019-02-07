@@ -12,7 +12,15 @@ test.pkl, train.pkl, train_dict.pkl: divide testing and training data using 5-fo
 # snapshot (server: LARC)
 # running using PatchNet_CNN_advanced
 2019-02-01_04-27-00 --> 2019-02-04_03-19-41 -embedding_dim=64 -filter_sizes=1,2,3 -num_filters=64 -hidden_units=512  # train_split_data.py
-2019-02-01_07-35-52 -embedding_dim=64 -filter_sizes=1,2,3 -num_filters=64 -hidden_units=512  # train_all.py
-
 # update_date path: ./snapshot/2019-02-01_04-27-00/epoch_103.pt
+2019-02-01_07-35-52 -->  -embedding_dim=64 -filter_sizes=1,2,3 -num_filters=64 -hidden_units=512  # train_all.py
+# update_date path: ./snapshot/2019-02-01_04-27-00/epoch_200.pt
+
+# snapshot (server: LARC)
+# running using PatchNet_CNN
+2019-02-07_02-14-42 -embedding_dim=64 -filter_sizes=1,2,3 -num_filters=64 -hidden_units=512  # train_split_data
+# running using PatchNet_CNN_advanced
+2019-02-07_02-15-44 -embedding_dim=64 -filter_sizes=1,2,3 -num_filters=64 -hidden_units=512 # train_all
+
+
 

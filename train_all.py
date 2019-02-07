@@ -4,7 +4,8 @@ from ultis import shuffled_mini_batches, load_info_label
 import torch
 import os
 import datetime
-from PatchNet_CNN_advanced import PatchNet
+# from PatchNet_CNN_advanced import PatchNet
+from PatchNet_CNN import PatchNet
 import torch.nn as nn
 from evaluation import eval
 
