@@ -5,7 +5,8 @@ import torch
 import os
 import datetime
 # from PatchNet_CNN_advanced import PatchNet
-from PatchNet_CNN import PatchNet
+# from PatchNet_CNN import PatchNet
+from PatchNet_CNN_fast import PatchNet
 import torch.nn as nn
 from evaluation import eval
 

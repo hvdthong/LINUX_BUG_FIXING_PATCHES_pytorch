@@ -3,8 +3,9 @@ from ultis import mini_batches
 from params import read_args
 import torch
 import os, datetime
-from PatchNet_CNN import PatchNet
+# from PatchNet_CNN import PatchNet
 # from PatchNet_CNN_advanced import PatchNet
+from PatchNet_CNN_fast import PatchNet
 import torch.nn as nn
 from evaluation import eval
 
