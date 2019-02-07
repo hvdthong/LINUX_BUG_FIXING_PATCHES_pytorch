@@ -39,7 +39,7 @@ def running_all_model_update(batches, model, params):
             if steps % params.log_interval == 0:
                 print('\rEpoch: {} step: {} - loss: {:.6f}'.format(num_epoch, steps, loss.item()))
 
-        print('Epoch: %i ---Data' % (epoch))
+        print('Epoch: %i / %i ---Data' % (epoch, params.num_epochs))
         acc, prc, rc, f1, auc_ = eval(data=batches, model=model)
         print('Accuracy: %f -- Precision: %f -- Recall: %f -- F1: %f -- AUC: %f' % (acc, prc, rc, f1, auc_))
         save(model, params.save_dir, 'epoch', num_epoch)

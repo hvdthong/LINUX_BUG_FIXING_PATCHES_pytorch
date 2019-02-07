@@ -42,10 +42,10 @@ def running_split_model(train_batches, test_batches, model, params):
             if steps % params.log_interval == 0:
                 print('\rEpoch: {} step: {} - loss: {:.6f}'.format(num_epoch, steps, loss.item()))
 
-        print('Epoch: %i ---Training data' % (epoch))
+        print('Epoch: %i / %i ---Training data' % (epoch, params.num_epochs))
         acc, prc, rc, f1, auc_ = eval(data=train_batches, model=model)
         print('Accuracy: %f -- Precision: %f -- Recall: %f -- F1: %f -- AUC: %f' % (acc, prc, rc, f1, auc_))
-        print('Epoch: %i ---Testing data' % (epoch))
+        print('---Testing data---')
         acc, prc, rc, f1, auc_ = eval(data=test_batches, model=model)
         print('Accuracy: %f -- Precision: %f -- Recall: %f -- F1: %f -- AUC: %f' % (acc, prc, rc, f1, auc_))
         save(model, params.save_dir, 'epoch', num_epoch)
