@@ -5,14 +5,14 @@ import os
 from keras.models import Sequential
 
 
-def lstm_cnn_all_data(x_train, y_train, dictionary_size, FLAGS):
+def lstm_cnn_all_data(x_train, y_train, FLAGS):
     # Convolution
     kernel_size = 5
     filters = 64
     pool_size = 4
 
     model = Sequential()
-    model.add(Embedding(dictionary_size, FLAGS.embedding_dim_text))
+    model.add(Embedding(FLAGS.vocab_msg, FLAGS.msg_length))
     model.add(Dropout(FLAGS.dropout_keep_prob))
     model.add(Conv1D(filters,
                      kernel_size,
@@ -24,9 +24,9 @@ def lstm_cnn_all_data(x_train, y_train, dictionary_size, FLAGS):
     # model.add(LSTM(lstm_output_size))
     # model.add(Dropout(FLAGS.dropout_keep_prob))
     # -------------------------------------------
-    model.add(LSTM(FLAGS.hidden_dim, return_sequences=True))
+    model.add(LSTM(FLAGS.hidden_units))
     model.add(GlobalMaxPooling1D())
-    model.add(Dense(FLAGS.hidden_dim, activation="relu"))
+    model.add(Dense(FLAGS.hidden_units, activation="relu"))
     model.add(Dropout(FLAGS.dropout_keep_prob))
     # -------------------------------------------
     model.add(Dense(1, activation='sigmoid'))
@@ -40,7 +40,7 @@ def lstm_cnn_all_data(x_train, y_train, dictionary_size, FLAGS):
     if not os.path.exists(outputFolder):
         os.makedirs(outputFolder)
 
-    filepath = outputFolder + "/" + FLAGS.model + "-{epoch:02d}.hdf5"
+    filepath = outputFolder + "/lstm_cnn" + "-{epoch:02d}.hdf5"
     checkpoint = ModelCheckpoint(filepath, monitor='val_acc', verbose=1, \
                                  save_best_only=False, save_weights_only=True, \
                                  mode='auto', period=1)

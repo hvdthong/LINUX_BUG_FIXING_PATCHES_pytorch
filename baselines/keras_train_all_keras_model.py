@@ -1,9 +1,22 @@
 from params import read_args
 from pickel_data import loading_variable
+from keras_model import lstm_cnn_all_data
+
+def load_info_label(data):
+    data = list(data)
+    pos = [1 for d in data if d == 1]
+    neg = [0 for d in data if d == 0]
+    return len(pos), len(neg)
 
 
 def train_all_model(commits, params):
-    print(len(commits))
+    labels, pad_, dict_ = commits
+
+    print('Number of commits for training model: %i' % (len(labels)))
+    print('Dictionary: %i' % (len(dict_)))
+    print('Pos -- Neg -- ', load_info_label(data=labels))
+    params.vocab_msg = len(dict_)
+    lstm_cnn_all_data(x_train=pad_, y_train=labels, FLAGS=params)
 
 
 if __name__ == '__main__':
