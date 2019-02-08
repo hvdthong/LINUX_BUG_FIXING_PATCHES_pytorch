@@ -1,4 +1,11 @@
-def lstm_cnn_all(x_train, y_train, dictionary_size, FLAGS):
+from keras.layers import LSTM
+from keras.layers import Conv1D, MaxPooling1D, GlobalMaxPooling1D, Embedding, Dropout, Dense
+from keras.callbacks import ModelCheckpoint
+import os
+from keras.models import Sequential
+
+
+def lstm_cnn_all_data(x_train, y_train, dictionary_size, FLAGS):
     # Convolution
     kernel_size = 5
     filters = 64
@@ -42,6 +49,5 @@ def lstm_cnn_all(x_train, y_train, dictionary_size, FLAGS):
     print('Train...')
     model.fit(x_train, y_train,
               batch_size=FLAGS.batch_size,
-              epochs=FLAGS.num_epochs,
-              validation_data=(x_test, y_test), callbacks=callbacks_list)
+              epochs=FLAGS.num_epochs, callbacks=callbacks_list)
     return model
