@@ -175,33 +175,26 @@ def padding_train_test_commits(train, test, params):
     # training data
     # -------------------------------------------------------------------------------------------------------
     # -------------------------------------------------------------------------------------------------------
-    train_msgs, train_codes = extract_msg(commits=train), extract_code(commits=test)
-    train_dict_msg, train_dict_code = dictionary(data=train_msgs), dictionary(data=train_codes)
-    train_pad_msg = mapping_commit_msg(msgs=train_msgs, max_length=params.msg_length, dict_msg=train_dict_msg)
-    train_pad_added_code = mapping_commit_code(type="added", commits=train, max_hunk=params.code_hunk,
-                                               max_code_line=params.code_line,
-                                               max_code_length=params.code_length, dict_code=train_dict_code)
-    train_pad_removed_code = mapping_commit_code(type="removed", commits=train, max_hunk=params.code_hunk,
-                                                 max_code_line=params.code_line,
-                                                 max_code_length=params.code_length, dict_code=train_dict_code)
+    train_msgs, train_codes = extract_msg(commits=train), keras_extract_code(commits=train)
+    train_msgs_codes = [m + ' ' + c for m, c in zip(train_msgs, train_codes)]
+    train_dict_msg_code = dictionary(data=train_msgs_codes)
+    train_pad_msg_msg_code = mapping_commit_msg(msgs=train_msgs_codes, max_length=params.msg_length,
+                                                dict_msg=train_dict_msg_code)
+
     train_labels = load_label_commits(commits=train)
-    train_data = (train_labels, train_pad_msg, train_pad_added_code, train_pad_removed_code)
-    dict_commit = (train_dict_msg, train_dict_code)
+    train_data = (train_labels, train_pad_msg_msg_code)
 
     # testing data
     # -------------------------------------------------------------------------------------------------------
     # -------------------------------------------------------------------------------------------------------
-    test_msgs, test_codes = extract_msg(commits=test), extract_code(commits=test)
-    test_pad_msg = mapping_commit_msg(msgs=test_msgs, max_length=params.msg_length, dict_msg=train_dict_msg)
-    test_pad_added_code = mapping_commit_code(type="added", commits=test, max_hunk=params.code_hunk,
-                                              max_code_line=params.code_line,
-                                              max_code_length=params.code_length, dict_code=train_dict_code)
-    test_pad_removed_code = mapping_commit_code(type="removed", commits=test, max_hunk=params.code_hunk,
-                                                max_code_line=params.code_line,
-                                                max_code_length=params.code_length, dict_code=train_dict_code)
+    test_msgs, test_codes = extract_msg(commits=test), keras_extract_code(commits=test)
+    test_msgs_codes = [m + ' ' + c for m, c in zip(test_msgs, test_codes)]
+    test_pad_msg_code = mapping_commit_msg(msgs=test_msgs_codes, max_length=params.msg_length,
+                                           dict_msg=train_dict_msg_code)
+
     test_labels = load_label_commits(commits=test)
-    test_data = (test_labels, test_pad_msg, test_pad_added_code, test_pad_removed_code)
-    return train_data, test_data, dict_commit
+    test_data = (test_labels, test_pad_msg_code)
+    return train_data, test_data, train_dict_msg_code
 
 
 def padding_pred_commit(commits, params, dict_msg, dict_code):

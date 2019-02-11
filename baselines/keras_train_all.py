@@ -1,5 +1,5 @@
 from params import read_args
-from pickel_data import loading_variable
+from keras_pickel_data import loading_variable
 from ultis import shuffled_mini_batches, load_info_label
 import torch
 import os

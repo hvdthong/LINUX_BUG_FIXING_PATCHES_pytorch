@@ -1,6 +1,7 @@
 from params import read_args
-from pickel_data import loading_variable
+from keras_pickel_data import loading_variable
 from keras_model import lstm_cnn_all_data
+
 
 def load_info_label(data):
     data = list(data)
