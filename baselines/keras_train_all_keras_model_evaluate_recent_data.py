@@ -15,7 +15,8 @@ if __name__ == '__main__':
     input_option = read_args().parse_args()
     input_help = read_args().print_help()
 
-    commits = loading_variable('train_all_recent_data_unknown_labels')
+    # commits = loading_variable('train_all_recent_data_unknown_labels')
+    commits = loading_variable('train_all_recent_new_data_unknown_labels')
     train_data, test_data, dict_ = commits
     train_labels, train_commits = train_data
     test_labels, test_commits = test_data
@@ -31,7 +32,8 @@ if __name__ == '__main__':
         model.load_weights(path_file_model + model_name + '{:02d}'.format(int(i)) + ".hdf5")
         y_pred = model.predict(test_commits, batch_size=input_option.batch_size)
         y_pred = np.ravel(y_pred)
-        np.save(path_file_save + model_name + 'recent_data-' + '{:02d}'.format(int(i)) + '.txt', y_pred)
+        # np.save(path_file_save + model_name + 'recent_data-' + '{:02d}'.format(int(i)) + '.txt', y_pred)
+        np.save(path_file_save + model_name + 'recent_new_data-' + '{:02d}'.format(int(i)) + '.txt', y_pred)
 
         # y_pred = np.ravel(y_pred)
         # y_pred[y_pred > 0.5] = 1

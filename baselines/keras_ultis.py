@@ -122,6 +122,11 @@ def commit_msg_recent(commit):
     return commit_msg
 
 
+def commit_msg_recent_ver1(commit):
+    commit_msg = commit[9].strip()
+    return commit_msg
+
+
 def commit_code_recent(commit):
     all_code = commit[6:]  # use for march data
     file_index = [i for i, c in enumerate(all_code) if c.startswith("file:")]
@@ -175,11 +180,35 @@ def commit_code_recent_keras(commit):
     return dicts
 
 
+def commit_code_recent_keras_ver1(commit):
+    all_code = commit[12:]  # use for recent commits
+    file_index = [i for i, c in enumerate(all_code) if c.startswith("file:")]
+    dicts = list()
+    for i in range(0, len(file_index)):
+        dict_code = {}
+        if i == len(file_index) - 1:
+            diff_code = all_code[file_index[i]:]
+        else:
+            diff_code = all_code[file_index[i]:file_index[i + 1]]
+        dict_code["file"] = all_code[file_index[i]].split(":")[1].strip()
+        dict_code["diff"] = diff_code[1:]
+        dicts.append(dict_code)
+    return dicts
+
+
 def commit_info_recent_keras(commit):
     id = commit_id(commit)
     msg = commit_msg_recent(commit)
     code = commit_code_recent_keras(commit)
     return id, msg, code
+
+
+def commit_info_recent_keras_ver1(commit):
+    id = commit_id(commit)
+    stable = commit_stable(commit)
+    msg = commit_msg_recent_ver1(commit)
+    code = commit_code_recent_keras_ver1(commit)
+    return id, stable, msg, code
 
 
 
@@ -197,6 +226,25 @@ def extract_commit_recent_sasha_keras(path_file):
             id, msg, code = commit_info_recent_keras(commits[indexes[i]:indexes[i + 1]])
         dict["id"] = id
         dict["stable"] = 'true'
+        dict["msg"] = msg
+        dict["code"] = code
+        dicts.append(dict)
+    return dicts
+
+
+def extract_commit_recent_sasha_keras_ver1(path_file):
+    # used to extract commit from Julia's data: Feb 16
+    commits = load_file(path_file=path_file)
+    indexes = commits_index(commits=commits)
+    dicts = list()
+    for i in range(0, len(indexes)):
+        dict = {}
+        if i == len(indexes) - 1:
+            id, stable, msg, code = commit_info_recent_keras_ver1(commits[indexes[i]:])
+        else:
+            id, stable, msg, code = commit_info_recent_keras_ver1(commits[indexes[i]:indexes[i + 1]])
+        dict["id"] = id
+        dict["stable"] = stable
         dict["msg"] = msg
         dict["code"] = code
         dicts.append(dict)
