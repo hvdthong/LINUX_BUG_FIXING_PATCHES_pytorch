@@ -47,14 +47,16 @@ if __name__ == '__main__':
 
     #########################################################################################################
     # loading recent linux data
-    path_file = '../data/recent_functions_translated.out'
+    # path_file = '../data/recent_functions_translated.out'
+    path_file = '../data/recent_functions_translated_ver1.out'
     commits_recent_data = extract_commit_recent_sasha_keras_ver1(path_file=path_file)
     commits_recent_data = reformat_commit_code_keras(commits=commits_recent_data, num_file=1)
     label_commits = [1 if c['stable'] == 'true' else 0 for c in commits_recent_data]
     id_train_commits = [d['id'] for d in commits_recent_data]
 
     path_results = './keras_model_results/'
-    path_model = 'lstm_cnn_all-recent_new_data-'
+    # path_model = 'lstm_cnn_all-recent_new_data-'
+    path_model = 'lstm_cnn_all-recent_new_data_ver1-'
     path_variation = '05'
     # path_variation = '10'
     path_file = path_results + path_model + path_variation + '.txt.npy'

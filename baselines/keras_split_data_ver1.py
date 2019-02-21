@@ -21,7 +21,8 @@ if __name__ == '__main__':
     train_commits = commits + commits_recent_sasha
 
     # loading recent linux data
-    path_file = '../data/recent_functions_translated.out'
+    # path_file = '../data/recent_functions_translated.out'
+    path_file = '../data/recent_functions_translated_ver1.out'
     commits_recent_data = extract_commit_recent_sasha_keras_ver1(path_file=path_file)
     commits_recent_data = reformat_commit_code_keras(commits=commits_recent_data, num_file=1)
     test_commits = commits_recent_data
@@ -30,4 +31,5 @@ if __name__ == '__main__':
     train_data, test_data, dict_ = padding_train_test_commits(train=train_commits, test=test_commits,
                                                               params=input_option)
     data = (train_data, test_data, dict_)
-    saving_variable('train_all_recent_new_data_unknown_labels', variable=data)
+    # saving_variable('train_all_recent_new_data_unknown_labels', variable=data)
+    saving_variable('train_all_recent_new_data_unknown_labels_ver1', variable=data)
